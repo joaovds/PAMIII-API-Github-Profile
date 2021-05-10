@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { KeyboardAvoidingView, Platform, Text, View } from 'react-native';
 import { RectButton, TextInput } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/core';
@@ -10,8 +10,12 @@ import styles from './styles';
 const Home: React.FC = () => {
   const navigation = useNavigation();
 
+  const [username, setUsername] = useState('');
+
   function handleNavigateToProfile() {
-    navigation.navigate('Profile');
+    if (username) {
+      navigation.navigate('Profile', { username });
+    }
   }
 
   return (
@@ -30,6 +34,8 @@ const Home: React.FC = () => {
           autoCorrect={false}
           placeholderTextColor="#6B7280"
           selectionColor="#6B7280"
+          value={username}
+          onChangeText={(text) => setUsername(text)}
         />
 
         <RectButton style={styles.button} onPress={handleNavigateToProfile}>

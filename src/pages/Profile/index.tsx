@@ -1,11 +1,23 @@
 import React from 'react';
+import { useRoute } from '@react-navigation/core';
 import { Image, Text, View, ScrollView } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import styles from './styles';
 
+interface IParams {
+  username: string;
+}
+
 const Profile: React.FC = () => {
+  const route = useRoute();
+
+  const routeParams = route.params as IParams;
+  const { username } = routeParams;
+
+  console.log(username);
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.container}>
